@@ -104,7 +104,7 @@
 
     <ul>
       <li>💍 Sealing — Lindon Utah Temple</li>
-      <li>🌿 Reception — Walker Farms</li>
+      <li>🌿 Luncheon — Walker Farms</li>
     </ul>
 
     <p>Please RSVP by <strong>August 1, 2026</strong></p>
@@ -129,11 +129,6 @@
       </label>
 
       <label>
-        Number attending the Reception
-        <input type="number" name="reception_count" min="0" value="0">
-      </label>
-
-      <label>
         Notes
         <textarea name="notes"></textarea>
       </label>
@@ -152,13 +147,11 @@
 
       const sealing = Number(form.sealing_count.value);
       const luncheon = Number(form.luncheon_count.value);
-      const reception = Number(form.reception_count.value);
 
       const payload = {
         guest_name: form.guest_name.value,
         sealing_count: sealing,
         luncheon_count: luncheon,
-        reception_count: reception,
         notes: form.notes.value
       };
 
@@ -166,16 +159,19 @@
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
-      }).then(() => {
-        if (sealing === 0 && luncheon === 0 && reception === 0) {
+      })
+      .then(() => {
+        if (sealing === 0 && luncheon === 0) {
           window.location.href = "thankyou.html?status=decline";
         } else {
           window.location.href = "thankyou.html?status=accept";
         }
-      }).catch(() => {
+      })
+      .catch(() => {
         alert("Something went wrong. Please try again.");
       });
     });
   </script>
 </body>
 </html>
+``
